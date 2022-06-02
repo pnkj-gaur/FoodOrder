@@ -1,0 +1,28 @@
+.meal__item {
+    padding: 1rem;
+    box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.3);
+    margin: 1rem;
+    transition: all 0.2s ;
+    background-color: rgba(245, 245, 245, 0.904);
+}
+
+.meal__item:hover{
+    background-color: rgba(233, 230, 230, 0.74);
+    transform: scale(1.01);
+}
+
+.meal__item h3 {
+    margin: 0 0 0.50rem 0;
+}
+
+.meal__desc {
+    font-style: italic;
+}
+
+.meal__price {
+    margin-top: 0.50rem;
+    font-weight: bold;
+    color: #ad5502;
+    font-size: 1.25rem;
+}
+

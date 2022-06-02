@@ -32,3 +32,8 @@
     background-color: black;
     color: white;
 }
+.button:focus {
+    opacity: 1;
+    background-color: rgba(160, 160, 160, 0.603);
+    color: white;
+}

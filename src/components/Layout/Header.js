@@ -3,15 +3,17 @@ import CartButton from "./CartButton";
 import classes from './Header.module.css';
 import img from '../../assets/food-img.jpg'
 
-const Header=()=>{
-    return(
+const Header = () => {
+    return (
         <Fragment>
             <header className={classes.header}>
                 <h2>Meal Order</h2>
-                <CartButton/>
+                <CartButton />
             </header>
             <div className={classes.image}>
-                <img src={img} alt="food"></img>
+                <div className={classes.img__div}>
+                    <img src={img} alt="food"></img>
+                </div>
             </div>
         </Fragment>
     );

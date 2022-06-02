@@ -3,7 +3,7 @@
     width: 90%;
     text-align: center;
     margin: auto;
-    margin-top: -8rem;
+    margin-top: -11rem;
     z-index: 20;
     position: relative;
     background-color: #292828ec;
@@ -20,4 +20,10 @@
 
 .summary p{
     font-weight: lighter;
+}
+
+@media screen and (max-width: 720px) {
+    .summary{
+        margin-top: -14rem;
+    }
 }

@@ -1,0 +1,40 @@
+.meals {
+    max-width: 70rem;
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+    animation: meals-appear 1s ease-out forward;
+}
+
+.meals__back{
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.308), rgba(0, 0, 0, 0.445)),url('../../assets/food-img.jpg');
+}
+
+.meals h1{
+    text-align: center;
+    margin: 0 1rem 3rem 1rem;
+    color: rgb(238, 156, 32);
+    background-color: rgba(0, 0, 0, 0.507);
+    padding: 1rem;
+}
+
+.meals ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes meals-appear {
+    from {
+        opacity: 0;
+        transform: translateY(3rem);
+    }   
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
