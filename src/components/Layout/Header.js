@@ -3,12 +3,12 @@ import CartButton from "./CartButton";
 import classes from './Header.module.css';
 import img from '../../assets/food-img.jpg'
 
-const Header = () => {
+const Header = (props) => {
     return (
         <Fragment>
             <header className={classes.header}>
                 <h2>Meal Order</h2>
-                <CartButton />
+                <CartButton onShow={props.onShowCart}/>
             </header>
             <div className={classes.image}>
                 <div className={classes.img__div}>

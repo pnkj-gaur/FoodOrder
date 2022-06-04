@@ -1,8 +1,11 @@
 import classes from './CartButton.module.css';
 
-const CartButton = () => {
+const CartButton = (props) => {
+    const show=()=>{
+        props.onShow();
+    }
     return (
-        <button className={classes.button}>
+        <button className={classes.button} onClick={show}>
             <span className={classes.icon}>
             </span>
             <span>Your Cart</span>
