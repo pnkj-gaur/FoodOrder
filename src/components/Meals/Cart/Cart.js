@@ -34,8 +34,8 @@ const Cart = (props) => {
                 <span><span style={{ fontStyle: "italic" }}>Rs</span> <span className={classes.price__span}>{totalAmount}</span></span>
             </div>
             <div className={classes.actions}>
-                {cartCtx.items.length > 0 && <button className={classes['button--alt']} onClick={props.onHideCart}>Close</button>}
-                <button className={classes.button}>Order</button>
+                <button className={classes['button--alt']} onClick={props.onHideCart}>Close</button>
+                {cartCtx.items.length > 0 && <button className={classes.button}>Order</button>}
             </div>
         </Modal>
     );
