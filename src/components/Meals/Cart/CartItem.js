@@ -6,13 +6,13 @@ const CartItem = (props) => {
             <div>
                 <h2>{props.item.name}</h2>
                 <div className={classes.summary}>
-                    <span className={classes.price}>Rs {props.item.price}</span>
+                    <span><span style={{fontStyle:"italic"}}>Rs </span><span className={classes.price}>{props.item.price}</span></span>
                     <span className={classes.amount}>x {props.item.amount}</span>
                 </div>
             </div>
             <div className={classes.actions}>
-                <button >-</button>
-                <button >+</button>
+                <button onClick={props.onRemove}>-</button>
+                <button onClick={props.onAdd}>+</button>
             </div>
         </li>
     );

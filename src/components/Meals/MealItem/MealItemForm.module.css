@@ -1,0 +1,37 @@
+.meal__form{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.meal__form label{
+    font-weight: bold;
+}
+.meal__form input{
+    width: 4rem;
+    border-radius: 5px;
+    border: 1.5px solid rgba(80, 80, 80, 0.616);
+    background-color: rgba(245, 245, 245, 0.425);
+    padding: 0.3rem 0.5rem;
+    font-weight: bold;
+}
+
+.meal__form__action{
+    text-align: right;
+}
+
+.meal__form__action button{
+    border-radius: 20px;
+    padding: 0.3rem 2rem;
+    border: none;
+    background-color: #641e03;
+    color: whitesmoke;
+    font:inherit
+}
+
+.error p{
+    color: rgba(255, 0, 0, 0.863);
+    margin: 0.5rem 0 0 0;
+}

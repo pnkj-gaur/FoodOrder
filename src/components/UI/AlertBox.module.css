@@ -1,14 +1,8 @@
-::-webkit-scrollbar {
-    display: none;
-}
-
 .modal {
-    width: 60%;
-    max-height: 70vh;
-    overflow: auto;
+    width: 40%;
     position: fixed;
     top: 20vh;
-    left: 20%;
+    left: 30%;
     background-color: whitesmoke;
     z-index: 40;
     border-radius: 1rem;

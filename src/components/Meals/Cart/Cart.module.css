@@ -46,7 +46,12 @@
     background-color: #8a2b06;
     color: white;
 }
-
+.emptyMsq{
+    text-align: center;
+}
+.price__span{
+    color: #8a2b06 !important;
+}
 @media screen and (max-width:720px) {
     .actions{
         justify-content: space-around;

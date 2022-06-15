@@ -3,11 +3,15 @@
     box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.3);
     margin: 1rem;
     transition: all 0.2s ;
-    background-color: rgba(245, 245, 245, 0.904);
+    background-color: rgba(245, 245, 245, 0.89);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .meal__item:hover{
-    background-color: rgba(233, 230, 230, 0.74);
+    background-color: rgba(233, 230, 230, 0.795);
     transform: scale(1.01);
 }
 
@@ -25,4 +29,34 @@
     color: #ad5502;
     font-size: 1.25rem;
 }
+.alert__action{
+    text-align: right;
+}
+.alert__action button{
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: transparent;
+    font: inherit;
+    transition: all 0.2s;
+    border: 1px solid #8a2b06;
+}
+
+.alert__action button:hover{
+    transform: scale(1.05);
+}
+
+.alert__action .button--alt{
+    color: white;
+    background-color: #8a2b06;
+}
+
+.alert__message span{
+    color: #8a2b06;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
+
 

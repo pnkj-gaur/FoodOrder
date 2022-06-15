@@ -15,16 +15,18 @@
 .summary {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    width: 8rem;
+    gap: 1rem;
 }
 
 .price {
     font-weight: bold;
     color: #8a2b06;
 }
-
+.price__span{
+    
+}
 .amount {
     font-weight: bold;
     border: 1px solid #ccc;
