@@ -29,7 +29,6 @@
     padding: 0.5rem 2rem;
     border-radius: 1rem;
     border: none;
-    background-color: transparent;
     font: inherit;
     transition: all 0.2s;
     border: 1px solid #8a2b06;
@@ -42,9 +41,13 @@
 .actions .button--alt{
     color: #8a2b06;
 }
+
 .actions .button{
-    background-color: #8a2b06;
+    background-color: #5a1a01;
     color: white;
+}
+.actions .button:hover{
+    background-color: #7a2706;
 }
 .emptyMsq{
     text-align: center;

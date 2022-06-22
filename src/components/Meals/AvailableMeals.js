@@ -1,42 +1,40 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CartContext from '../../store/cart-context';
 import classes from './AvailableMeals.module.css';
 import MealsItem from "./MealItem/MealItem";
 
-const DUMMY_MEALS = [{
-    id: 'm1',
-    name: 'Sushi',
-    description: 'Finest fish and veggies',
-    price: 22.99,
-},
-{
-    id: 'm2',
-    name: 'Schnitzel',
-    description: 'A german specialty!',
-    price: 16.5,
-},
-{
-    id: 'm3',
-    name: 'Barbecue Burger',
-    description: 'American, raw, meaty',
-    price: 12.99,
-},
-{
-    id: 'm4',
-    name: 'Green Bowl',
-    description: 'Healthy...and green...',
-    price: 18.99,
-},
-];
-
 const AvailableMeals = () => {
-    const cartCtx=useContext(CartContext);
+    const [meals,setMeals]=useState([]);
+    const cartCtx = useContext(CartContext);
     const onSubmit = (item) => {
         cartCtx.addItem(item);
     };
-    
-    const mealsList = DUMMY_MEALS.map((item,i) => {
-        return <MealsItem key={i} meal={item} submitHandler={onSubmit}/>
+    useEffect(() => {
+        const fetchMeals = async () => {
+            const res = await fetch("https://defoodde-default-rtdb.firebaseio.com/meals.json");
+            if (!res.ok) {
+                throw new Error("Something went wrong!");
+            }
+            const responseData = await res.json();
+            let availableMeals = [];
+            for (const key in responseData) {
+                availableMeals.push({
+                    id: key,
+                    name: responseData[key].name,
+                    description: responseData[key].description,
+                    price: responseData[key].price,
+                });
+            }
+            setMeals(availableMeals);
+
+        }
+        fetchMeals().catch(err=>{
+            console.log(err);
+        });
+    }, []);
+
+    const mealsList = meals.map((item, i) => {
+        return <MealsItem key={i} meal={item} submitHandler={onSubmit} />
     });
     return (
         <section className={classes.meals}>

@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import classes from './CartButton.module.css';
+import CartContext from '../../store/cart-context';
 
 const CartButton = (props) => {
+    const ctx=useContext(CartContext);
     const show=()=>{
         props.onShow();
     }
@@ -9,7 +12,7 @@ const CartButton = (props) => {
             <span className={classes.icon}>
             </span>
             <span>Your Cart</span>
-            <span className={classes.badge}>3</span>
+            <span className={classes.badge}>{ctx.items.length}</span>
         </button>
     );
 }
