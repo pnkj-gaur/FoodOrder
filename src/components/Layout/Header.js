@@ -1,20 +1,32 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import CartButton from "./CartButton";
 import classes from './Header.module.css';
-import img from '../../assets/food-img.jpg'
+import CartContext from '../../store/cart-context';
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth/auth-reducer";
 
 const Header = (props) => {
+    const cartCtx = useContext(CartContext);
+    const navigate=useNavigate();
+    const dispatch=useDispatch();
+    const onLogOut=()=>{
+        dispatch(authActions.logout());
+        navigate('/',{replace:true});
+    }
+    const onShowCart = () => {
+        cartCtx.showCartF();
+    }
     return (
         <Fragment>
             <header className={classes.header}>
                 <h2>Meal Order</h2>
-                <CartButton onShow={props.onShowCart}/>
-            </header>
-            <div className={classes.image}>
-                <div className={classes.img__div}>
-                    <img src={img} alt="food"></img>
+                <div className={classes.nav}>
+                    <p onClick={onLogOut}>Log Out</p>
+                    <Link to="/LogIn">Profile</Link>
+                    <CartButton onShow={onShowCart} />
                 </div>
-            </div>
+            </header>
         </Fragment>
     );
 };

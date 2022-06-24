@@ -6,6 +6,7 @@ import MealItemForm from './MealItemForm';
 const MealsItem = (props) => {
     const [itemAdded, setItemAdded] = useState(false);
     const [qty, setQty] = useState(0);
+    var windowOffset = 0;
     const onSubmit = (Qty) => {
         let item = {
             id: props.meal.id,
@@ -16,10 +17,15 @@ const MealsItem = (props) => {
         };
         props.submitHandler(item);
         setQty(Qty);
+        windowOffset = window.scrollY;
+        document.body.setAttribute('style', `position:fixed;top:-${windowOffset}px;left:0;right:0`);
         setItemAdded(true);
     };
 
     const onHideAlert=()=>{
+        windowOffset = document.body.style.top;
+        document.body.setAttribute('style', '');
+        window.scrollTo(0, parseInt(windowOffset || '0') * -1);
         setItemAdded(false);
     }
     return (

@@ -20,6 +20,9 @@ const Cart = (props) => {
     const orderHandler = () => {
         setIsCheckout(true);
     };
+    const onCloseCart=()=>{
+        cartCtx.hideCartF();
+    }
 
     const submitOrderHandler = async (userData) => {
         setIsSubmitting(true);
@@ -36,7 +39,7 @@ const Cart = (props) => {
     };
 
     let totalAmount = Math.abs(cartCtx.totalAmount.toFixed(2));
-
+//Cart Meal data
     const cartitems = cartCtx.items.map((item) => (
         <CartItem key={item.id} item={item}
             onAdd={onAdd.bind(null, item)}
@@ -47,7 +50,7 @@ const Cart = (props) => {
 //Modal Actions
     const modalActions = (
         <div className={classes.actions}>
-            <button className={classes['button--alt']} onClick={props.onHideCart}>Close</button>
+            <button className={classes['button--alt']} onClick={onCloseCart}>Close</button>
             {cartCtx.items.length > 0 && <button className={classes.button} onClick={orderHandler} >Order</button>}
         </div>
     );
@@ -64,7 +67,7 @@ const Cart = (props) => {
                 <span><span style={{ fontStyle: "italic" }}>Rs</span> <span className={classes.price__span}>{totalAmount}</span></span>
             </div>
             {isCheckout && (
-                <Checkout onConfirm={submitOrderHandler} onCancel={props.onHideCart} />
+                <Checkout onConfirm={submitOrderHandler} onCancel={onCloseCart} />
             )}
             {!isCheckout && modalActions}
         </React.Fragment>
@@ -76,7 +79,7 @@ const Cart = (props) => {
         <React.Fragment>
             <p>Successfully sent the order!</p>
             <div className={classes.actions}>
-                <button className={classes.button} onClick={props.onHideCart}>
+                <button className={classes.button} onClick={onCloseCart}>
                     Close
                 </button>
             </div>
@@ -84,7 +87,7 @@ const Cart = (props) => {
     );
 
     return (
-        <Modal onHide={props.onHideCart}>
+        <Modal onHide={cartCtx.hideCartF}>
             {!isSubmitting && !didSubmit && cartModalContent}
             {isSubmitting && isSubmittingModalContent}
             {!isSubmitting && didSubmit && didSubmitModalContent}

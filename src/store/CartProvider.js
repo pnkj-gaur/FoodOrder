@@ -5,6 +5,7 @@ import CartContext from './cart-context';
 const defaultCartState = {
     items: [],
     totalAmount: 0,
+    showCart: false
 };
 
 const cartReducer = (state, action) => {
@@ -32,6 +33,7 @@ const cartReducer = (state, action) => {
         return {
             items: updatedItems,
             totalAmount: updatedTotalAmount,
+            showCart: state.showCart
         };
     }
     if (action.type === 'REMOVE') {
@@ -51,8 +53,18 @@ const cartReducer = (state, action) => {
 
         return {
             items: updatedItems,
-            totalAmount: updatedTotalAmount
+            totalAmount: updatedTotalAmount,
+            showCart: state.showCart
         };
+    }
+    if (action.type === 'hideCart') {
+        return { ...state, showCart: false };
+    }
+    if (action.type === 'showCart') {
+        return { ...state, showCart: true };
+    }
+    if (action.type === 'CLEAR') {
+        return { ...state, showCart: true };
     }
 
     return defaultCartState;
@@ -63,7 +75,7 @@ const CartProvider = (props) => {
         cartReducer,
         defaultCartState
     );
-
+    var windowOffset = 0;
     const addItemToCartHandler = (item) => {
         dispatchCartAction({ type: 'ADD', item: item });
     };
@@ -73,7 +85,18 @@ const CartProvider = (props) => {
     };
 
     const clearCartHandler = () => {
-        dispatchCartAction({type: 'CLEAR'});
+        dispatchCartAction({ type: 'CLEAR' });
+    };
+    const hideCartHandler = () => {
+        windowOffset = document.body.style.top;
+        document.body.setAttribute('style', '');
+        window.scrollTo(0, parseInt(windowOffset || '0') * -1);
+        dispatchCartAction({ type: 'hideCart' });
+    };
+    const showCartHandler = () => {
+        windowOffset = window.scrollY;
+        document.body.setAttribute('style', `position:fixed;top:-${windowOffset}px;left:0;right:0`);
+        dispatchCartAction({type: 'showCart'});
       };
 
     const cartContext = {
@@ -81,7 +104,10 @@ const CartProvider = (props) => {
         totalAmount: cartState.totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
-        clearCart: clearCartHandler
+        clearCart: clearCartHandler,
+        showCartF:showCartHandler,
+        hideCartF:hideCartHandler,
+        showCart: cartState.showCart
     };
 
     return (

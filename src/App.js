@@ -1,29 +1,55 @@
 import './App.css';
-import { useState } from 'react';
+
 import Header from './components/Layout/Header';
 import Meals from './components/Meals/Meals';
-import Cart from './components/Meals/Cart/Cart';
 import CartProvider from './store/CartProvider';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import LogIn from './components/Auth/Auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from './store/auth/auth-reducer';
+
+const calculateRemainingTime = (expirationTime) => {
+  const currentTime = new Date().getTime();
+  const adjExpirationTime = new Date(expirationTime).getTime();
+
+  const remainingDuration = adjExpirationTime - currentTime;
+
+  return remainingDuration;
+};
+const retrieveStoredToken = () => {
+  const storedToken = localStorage.getItem('token');
+  const storedExpirationDate = localStorage.getItem('expirationTime');
+
+  const remainingTime = calculateRemainingTime(storedExpirationDate);
+
+  if (remainingTime <= 3600) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationTime');
+    return null;
+  }
+
+  return {
+    token: storedToken,
+    duration: remainingTime,
+  };
+};
 
 function App() {
-  const [showCart, setShowCart] = useState(false);
-  var windowOffset=0;
-  const cartShowHandler = () => {
-    windowOffset = window.scrollY;
-    document.body.setAttribute('style', `position:fixed;top:-${windowOffset}px;left:0;right:0`);
-    setShowCart(true);
-  }
-  const cartHideHandler = () => {
-    windowOffset=document.body.style.top;
-    document.body.setAttribute('style','');
-    window.scrollTo(0,parseInt(windowOffset || '0') * -1);
-    setShowCart(false);
+  const tokenData = retrieveStoredToken();
+  const isAuth = useSelector(state => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
+  if (tokenData) {
+    dispatch(authActions.login({ token: tokenData.token, expTime: tokenData.duration }));
   }
   return (
     <CartProvider>
-      {showCart && <Cart onHideCart={cartHideHandler} />}
-      <Header onShowCart={cartShowHandler} />
-      <Meals />
+      <Header />
+      <Routes>
+        <Route path="/" element={<Navigate replace to='/Meals' />} />
+        {isAuth && <Route path="/Meals" element={<Meals />} />}
+        <Route path="/LogIn" element={<LogIn />} />
+        <Route path="*" element={<Navigate replace to='/LogIn' />} />
+      </Routes>
     </CartProvider>
   );
 }
