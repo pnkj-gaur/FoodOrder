@@ -57,6 +57,13 @@
     font-weight: bold;
 }
 
+@media screen and (max-width:720px) {
+    .meal__item{
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
 
 
 
