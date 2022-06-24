@@ -30,17 +30,17 @@ const retrieveStoredToken = () => {
 
   return {
     token: storedToken,
-    duration: remainingTime,
+    expTime: storedExpirationDate,
   };
 };
 
 function App() {
   const tokenData = retrieveStoredToken();
-  const isAuth = useSelector(state => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   if (tokenData) {
-    dispatch(authActions.login({ token: tokenData.token, expTime: tokenData.duration }));
+    dispatch(authActions.login({ token: tokenData.token, expTime: tokenData.expTime }));
   }
+  const isAuth = useSelector(state => state.auth.isAuthenticated);
   return (
     <CartProvider>
       <Header />

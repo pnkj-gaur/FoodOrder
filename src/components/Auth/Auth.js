@@ -54,6 +54,7 @@ const LogIn = () => {
             const expirationTime = new Date(
                 new Date().getTime() + +data.expiresIn * 1000
             );
+            console.log(expirationTime);
             dispatch(authActions.login({token:data.idToken,expTime:expirationTime.toISOString()}));
             history('/',{replace:true});
         }).catch((err) => {
