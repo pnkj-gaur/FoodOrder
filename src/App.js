@@ -3,10 +3,11 @@ import './App.css';
 import Header from './components/Layout/Header';
 import Meals from './components/Meals/Meals';
 import CartProvider from './store/CartProvider';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import LogIn from './components/Auth/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from './store/auth/auth-reducer';
+import { useEffect } from 'react';
 
 const calculateRemainingTime = (expirationTime) => {
   const currentTime = new Date().getTime();
@@ -36,11 +37,16 @@ const retrieveStoredToken = () => {
 
 function App() {
   const tokenData = retrieveStoredToken();
+  const navigate=useNavigate();
   const isAuth = useSelector(state => state.auth.isAuthenticated);
-  console.log(isAuth);
+  useEffect(()=>{
+    if(isAuth){
+      navigate("/Meals",{replace:true});
+    }
+  },[isAuth,navigate]);
   const dispatch = useDispatch();
   if (tokenData) {
-    dispatch(authActions.login({ token: tokenData.token, expTime: tokenData.expTime }));
+    dispatch(authActions.login({ token: tokenData.token, expTime: tokenData.expTime}));
   }
   
   return (

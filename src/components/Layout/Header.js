@@ -52,7 +52,10 @@ const Header = (props) => {
     }
     return (
         <Fragment>
-            <header className={`${classes.header} ${(location.pathname === "/LogIn" || scrollDimensions.scrollY>=433) ? classes.header_dark : ""} ${(scrollDimensions.scrollX>=720 && scrollDimensions.scrollY >= 433 && mouseDimensions > 200) || (scrollDimensions.scrollX<720 && scrollDimensions.scrollY >= 200)  ? classes.header_hide : ""}`}>
+            <header className={`${classes.header} ${(location.pathname === "/LogIn" ||
+                scrollDimensions.scrollY >= 433) ? classes.header_dark : ""} ${(scrollDimensions.scrollX >= 720 &&
+                    scrollDimensions.scrollY >= 433 && mouseDimensions > 200) || (scrollDimensions.scrollX < 720 &&
+                        scrollDimensions.scrollY >= 110) ? classes.header_hide : ""}`}>
                 <h2>Meal Order</h2>
                 <div className={classes.nav}>
                     {isAuth && <p onClick={onLogOut}>Log Out</p>}
