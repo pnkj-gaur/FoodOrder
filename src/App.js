@@ -36,11 +36,13 @@ const retrieveStoredToken = () => {
 
 function App() {
   const tokenData = retrieveStoredToken();
+  const isAuth = useSelector(state => state.auth.isAuthenticated);
+  console.log(isAuth);
   const dispatch = useDispatch();
   if (tokenData) {
     dispatch(authActions.login({ token: tokenData.token, expTime: tokenData.expTime }));
   }
-  const isAuth = useSelector(state => state.auth.isAuthenticated);
+  
   return (
     <CartProvider>
       <Header />
